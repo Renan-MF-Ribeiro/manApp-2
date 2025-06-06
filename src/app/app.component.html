@@ -1,3 +1,33 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<ion-tabs>
+  <ion-tab tab="orders">
+    <app-orders />
+  </ion-tab>
+  <ion-tab tab="products">
+    <app-products />
+  </ion-tab>
+  <ion-tab tab="debtors">
+    <app-debtors />
+  </ion-tab>
+  <ion-tab tab="cashier">
+    <app-cashier />
+  </ion-tab>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="orders">
+      <ion-icon name="receipt"></ion-icon>
+      Orders
+    </ion-tab-button>
+    <ion-tab-button tab="products">
+      <ion-icon name="cube"></ion-icon>
+      Products
+    </ion-tab-button>
+    <ion-tab-button tab="debtors">
+      <ion-icon name="create"></ion-icon>
+      Debtors
+    </ion-tab-button>
+    <ion-tab-button tab="cashier">
+      <ion-icon name="cash"></ion-icon>
+      Cashier
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

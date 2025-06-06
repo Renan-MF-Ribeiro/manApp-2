@@ -1,9 +1,24 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Produtos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="newProductVisible = !newProductVisible">
+        <ion-icon [name]="newProductVisible ? 'remove' : 'add'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <p>Conteúdo dos Produtos</p>
 </ion-content>
+
+<p-dialog
+  header="Edit Profile"
+  [modal]="true"
+  [(visible)]="newProductVisible"
+  position="bottom"
+  [style]="{ width: '25rem' }"
+>
+  <app-new-product />
+</p-dialog>
