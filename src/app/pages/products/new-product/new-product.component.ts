@@ -3,9 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { IonIcon } from '@ionic/angular/standalone';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-new-product',
@@ -14,9 +12,7 @@ import { IonIcon } from '@ionic/angular/standalone';
     ReactiveFormsModule,
     InputTextModule,
     ButtonModule,
-    InputGroupModule,
-    InputGroupAddonModule,
-    IonIcon
+    InputNumberModule
   ],
   templateUrl: './new-product.component.html',
   styleUrl: './new-product.component.scss'

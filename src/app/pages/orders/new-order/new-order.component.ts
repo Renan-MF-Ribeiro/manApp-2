@@ -5,7 +5,7 @@ import {
   FormGroup,
   ReactiveFormsModule
 } from '@angular/forms';
-import { IonTitle, IonInput } from '@ionic/angular/standalone';
+import { IonTitle } from '@ionic/angular/standalone';
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({

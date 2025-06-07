@@ -70,6 +70,5 @@ export class ProductsComponent implements OnInit {
     await firstValueFrom(
       this._productsService.updateProduct(product.id, product)
     );
-    // this.listProducts();
   }
 }
