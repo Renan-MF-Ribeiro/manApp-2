@@ -1,21 +1,16 @@
-import { Component, EnvironmentInjector } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
-  IonContent,
-  IonHeader,
   IonIcon,
   IonTab,
   IonTabBar,
   IonTabButton,
-  IonTabs,
-  IonTitle,
-  IonToolbar
+  IonTabs
 } from '@ionic/angular/standalone';
-import { cash, create, cube, receipt } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { DebtorsComponent } from './pages/debtors/debtors.component';
 import { CashierComponent } from './pages/cashier/cashier.component';
+import { RegisterIconsService } from './services/register-icons.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -25,10 +20,6 @@ import { CashierComponent } from './pages/cashier/cashier.component';
     IonTabButton,
     IonTabs,
     IonTab,
-    IonContent,
-    IonToolbar,
-    IonTitle,
-    IonHeader,
     OrdersComponent,
     ProductsComponent,
     DebtorsComponent,
@@ -40,8 +31,7 @@ import { CashierComponent } from './pages/cashier/cashier.component';
 })
 export class AppComponent {
   title = 'manApp';
-  constructor(public environmentInjector: EnvironmentInjector) {
-    // You can add any initialization logic here if needed
-    addIcons({ receipt, cube, create, cash });
-  }
+
+  private readonly _registerIconsService =
+    inject(RegisterIconsService).registerIcons();
 }
