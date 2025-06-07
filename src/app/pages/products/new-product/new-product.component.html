@@ -1,1 +1,25 @@
-<p>new-product works!</p>
+<form [formGroup]="productForm" class="flex w-full flex-col gap-4">
+  <p-inputGroup>
+    <p-inputGroupAddon>
+      <ion-icon name="person"></ion-icon>
+    </p-inputGroupAddon>
+    <input
+      type="text"
+      pInputText
+      formControlName="name"
+      placeholder="Nome do produto"
+    />
+  </p-inputGroup>
+  <p-inputGroup>
+    <p-inputGroupAddon>
+      <ion-icon name="cash"></ion-icon>
+    </p-inputGroupAddon>
+    <input
+      type="number"
+      pInputText
+      formControlName="price"
+      placeholder="Preço do produto"
+    />
+  </p-inputGroup>
+  <button type="submit" pButton label="Salvar" (click)="saveProduct()"></button>
+</form>

@@ -1,24 +1,47 @@
 <ion-header>
   <ion-toolbar>
+    <div slot="start" class="flex size-10 items-center justify-center">
+      <ion-icon name="cube" size="large"></ion-icon>
+    </div>
     <ion-title>Produtos</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="newProductVisible = !newProductVisible">
-        <ion-icon [name]="newProductVisible ? 'remove' : 'add'"></ion-icon>
+        <ion-icon name="add-circle" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <p>Conteúdo dos Produtos</p>
+  <ion-refresher slot="fixed" (ionRefresh)="listProducts($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
+  <p-dataView #dv [value]="products" emptyMessage="Nenhum produto encontrado">
+    <ng-template pTemplate="list" let-products>
+      <div class="grid py-4">
+        @for (product of products; track product) {
+          <div class="flex w-full gap-4 border-b border-gray-200 px-2 py-1">
+            <p-inputSwitch
+              [(ngModel)]="product.status"
+              (onChange)="updateProductStatus(product)"
+            />
+            <div class="flex w-full justify-between">
+              <p>{{ product.name }}</p>
+              <p>{{ product.price | currency: 'BRL' }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </ng-template>
+  </p-dataView>
 </ion-content>
 
 <p-dialog
-  header="Edit Profile"
+  [header]="'Novo Produto'"
   [modal]="true"
   [(visible)]="newProductVisible"
   position="bottom"
   [style]="{ width: '25rem' }"
 >
-  <app-new-product />
+  <app-new-product (productCreated)="productCreated()" />
 </p-dialog>
