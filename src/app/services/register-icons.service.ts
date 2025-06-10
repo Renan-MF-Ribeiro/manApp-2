@@ -5,9 +5,11 @@ import {
   cash,
   create,
   cube,
+  pencil,
   person,
   receipt,
-  remove
+  remove,
+  trash
 } from 'ionicons/icons';
 
 @Injectable({
@@ -18,6 +20,16 @@ export class RegisterIconsService {
     this.registerIcons();
   }
   registerIcons() {
-    addIcons({ addCircle, remove, receipt, cube, create, cash, person });
+    addIcons({
+      addCircle,
+      remove,
+      receipt,
+      cube,
+      create,
+      cash,
+      person,
+      pencil,
+      trash
+    });
   }
 }

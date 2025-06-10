@@ -7,7 +7,7 @@ import { delay } from 'rxjs/operators';
 })
 export class DbService {
   // Adiciona um novo item
-  delay = 1500;
+  delay = 0;
 
   add(collection: string, item: any): Observable<void> {
     const items = this.listAllSync(collection);
@@ -47,7 +47,7 @@ export class DbService {
   }
 
   // Remove um item pelo id
-  delete(collection: string, id: number): Observable<void> {
+  delete(collection: string, id: string): Observable<void> {
     const items = this.listAllSync(collection).filter((item) => item.id !== id);
     this.save(collection, items);
     return of(undefined).pipe(delay(this.delay));

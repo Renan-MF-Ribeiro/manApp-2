@@ -11,6 +11,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { DebtorsComponent } from './pages/debtors/debtors.component';
 import { CashierComponent } from './pages/cashier/cashier.component';
 import { RegisterIconsService } from './services/register-icons.service';
+import { LoadingComponent } from './components/loading/loading.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -23,7 +24,8 @@ import { RegisterIconsService } from './services/register-icons.service';
     OrdersComponent,
     ProductsComponent,
     DebtorsComponent,
-    CashierComponent
+    CashierComponent,
+    LoadingComponent
   ],
 
   templateUrl: './app.component.html',

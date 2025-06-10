@@ -1,4 +1,8 @@
-<form [formGroup]="productForm" class="flex w-full flex-col gap-4">
+<form
+  [formGroup]="productForm"
+  (submit)="saveProduct()"
+  class="flex w-full max-w-[95vw] flex-col gap-4"
+>
   <input
     type="text"
     pInputText

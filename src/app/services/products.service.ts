@@ -30,7 +30,7 @@ export class ProductsService {
     return this._db.update('products', id, product);
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(id: string) {
     return this._db.delete('products', id);
   }
 }

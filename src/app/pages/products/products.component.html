@@ -20,16 +20,40 @@
     <ng-template pTemplate="list" let-products>
       <div class="grid py-4">
         @for (product of products; track product) {
-          <div class="flex w-full gap-4 border-b border-gray-200 px-2 py-1">
-            <p-inputSwitch
-              [(ngModel)]="product.status"
-              (onChange)="updateProductStatus(product)"
-            />
-            <div class="flex w-full justify-between">
-              <p>{{ product.name }}</p>
-              <p>{{ product.price | currency: 'BRL' }}</p>
-            </div>
-          </div>
+          <ion-item-sliding>
+            <ion-item-options side="start">
+              <ion-item-option
+                class="bg-blue-300 text-white"
+                (click)="editProduct(product)"
+              >
+                <ion-icon slot="start" name="pencil"></ion-icon>
+                Editar
+              </ion-item-option>
+            </ion-item-options>
+
+            <ion-item>
+              <div class="flex w-full gap-4 py-3">
+                <p-inputSwitch
+                  [(ngModel)]="product.status"
+                  (onChange)="updateProductStatus(product)"
+                />
+                <div class="flex w-full justify-between">
+                  <p>{{ product.name }}</p>
+                  <p>{{ product.price | currency: 'BRL' }}</p>
+                </div>
+              </div>
+            </ion-item>
+
+            <ion-item-options side="end">
+              <ion-item-option
+                class="bg-red-500 text-white"
+                (click)="deleteProduct(product)"
+              >
+                <ion-icon slot="start" name="trash"></ion-icon>
+                Delete
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
         }
       </div>
     </ng-template>
@@ -41,7 +65,12 @@
   [modal]="true"
   [(visible)]="newProductVisible"
   position="bottom"
-  [style]="{ width: '25rem' }"
+  [draggable]="false"
+  [style]="{ width: '100%' }"
+  (onHide)="dialogClosed(false)"
 >
-  <app-new-product (productCreated)="productCreated()" />
+  <app-new-product
+    [product]="productToEdit"
+    (productCreated)="dialogClosed(true)"
+  />
 </p-dialog>
