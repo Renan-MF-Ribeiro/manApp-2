@@ -1,10 +1,21 @@
-<form [formGroup]="orderForm" class="flex flex-col gap-4">
+<form
+  [formGroup]="orderForm"
+  class="flex flex-col gap-4 pt-8"
+  (submit)="saveOrder()"
+>
+  <input
+    type="text"
+    pInputText
+    formControlName="client"
+    placeholder="Nome do cliente"
+    class="!text-xs"
+  />
   <ion-select
     aria-label="Produto"
     interface="action-sheet"
     placeholder="Selecione um produto"
     (ionChange)="addProduct($event)"
-    fill="solid"
+    class="!text-xs"
   >
     @for (product of products; track product.id) {
       <ion-select-option [value]="product.id">{{
@@ -12,12 +23,6 @@
       }}</ion-select-option>
     }
   </ion-select>
-  <input
-    type="text"
-    pInputText
-    formControlName="client"
-    placeholder="Nome do cliente"
-  />
 
   @if (orderForm.getRawValue().itens.length) {
     <p-dataView
@@ -26,11 +31,11 @@
       emptyMessage="Nenhum pedido encontrado"
     >
       <ng-template pTemplate="list" let-orderProducts>
-        <div class="grid max-h-[500px] overflow-y-auto py-4">
+        <div class="grid max-h-[170px] overflow-y-auto py-4">
           @for (order of orderProducts; track order.id) {
-            <div class="flex h-fit w-full gap-4 py-3">
+            <div class="flex h-fit w-full gap-4 border-b">
               <div class="flex w-full flex-col">
-                <div class="flex w-full items-center justify-between">
+                <div class="flex w-full items-center justify-between text-xs">
                   <p>{{ order.item.name }}</p>
                   <div class="flex items-center gap-1">
                     <ion-button
@@ -56,7 +61,7 @@
                     </ion-button>
                   </div>
                 </div>
-                <div class="flex w-full justify-between">
+                <div class="flex w-full justify-between text-xs">
                   <p>{{ order.item.price | currency: 'BRL' }}</p>
                   <p>{{ order.total | currency: 'BRL' }}</p>
                 </div>
@@ -67,4 +72,10 @@
       </ng-template>
     </p-dataView>
   }
+  <hr />
+  <div class="flex w-full justify-between">
+    <p>Total:</p>
+    <span>{{ orderForm.getRawValue().total | currency: 'BRL' }}</span>
+  </div>
+  <button type="submit" pButton label="Salvar"></button>
 </form>

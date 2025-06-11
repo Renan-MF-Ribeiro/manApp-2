@@ -34,8 +34,8 @@
             <ion-item>
               <div class="flex w-full gap-4 py-3">
                 <div class="flex w-full justify-between">
-                  <p>{{ order.name }}</p>
-                  <p>{{ order.price | currency: 'BRL' }}</p>
+                  <p>{{ order.client }}</p>
+                  <p>{{ order.total | currency: 'BRL' }}</p>
                 </div>
               </div>
             </ion-item>
@@ -57,7 +57,7 @@
 </ion-content>
 
 <p-dialog
-  header="Pedido"
+  [showHeader]="false"
   [modal]="true"
   [(visible)]="formOrderVisible"
   position="bottom"
