@@ -9,7 +9,8 @@ import {
   person,
   receipt,
   remove,
-  trash
+  trash,
+  add
 } from 'ionicons/icons';
 
 @Injectable({
@@ -29,7 +30,8 @@ export class RegisterIconsService {
       cash,
       person,
       pencil,
-      trash
+      trash,
+      add
     });
   }
 }

@@ -1,9 +1,70 @@
-<form [formGroup]="orderForm" class="flex flex-col gap-4 p-4">
-  <ion-title>Novo Pedido</ion-title>
+<form [formGroup]="orderForm" class="flex flex-col gap-4">
+  <ion-select
+    aria-label="Produto"
+    interface="action-sheet"
+    placeholder="Selecione um produto"
+    (ionChange)="addProduct($event)"
+    fill="solid"
+  >
+    @for (product of products; track product.id) {
+      <ion-select-option [value]="product.id">{{
+        product.name
+      }}</ion-select-option>
+    }
+  </ion-select>
   <input
     type="text"
     pInputText
     formControlName="client"
     placeholder="Nome do cliente"
   />
+
+  @if (orderForm.getRawValue().itens.length) {
+    <p-dataView
+      #dv
+      [value]="orderForm.getRawValue().itens"
+      emptyMessage="Nenhum pedido encontrado"
+    >
+      <ng-template pTemplate="list" let-orderProducts>
+        <div class="grid max-h-[500px] overflow-y-auto py-4">
+          @for (order of orderProducts; track order.id) {
+            <div class="flex h-fit w-full gap-4 py-3">
+              <div class="flex w-full flex-col">
+                <div class="flex w-full items-center justify-between">
+                  <p>{{ order.item.name }}</p>
+                  <div class="flex items-center gap-1">
+                    <ion-button
+                      fill="clear"
+                      (click)="decrementQuantity($index)"
+                    >
+                      <ion-icon
+                        size="small"
+                        slot="icon-only"
+                        icon="remove"
+                      ></ion-icon>
+                    </ion-button>
+                    <span class="text-xs">{{ order.quantity }}</span>
+                    <ion-button
+                      fill="clear"
+                      (click)="incrementQuantity($index)"
+                    >
+                      <ion-icon
+                        size="small"
+                        slot="icon-only"
+                        icon="add"
+                      ></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <div class="flex w-full justify-between">
+                  <p>{{ order.item.price | currency: 'BRL' }}</p>
+                  <p>{{ order.total | currency: 'BRL' }}</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </ng-template>
+    </p-dataView>
+  }
 </form>

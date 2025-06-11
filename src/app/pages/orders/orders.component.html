@@ -4,9 +4,70 @@
       <ion-icon name="receipt" size="large"></ion-icon>
     </div>
     <ion-title>Pedidos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openFormOrder()">
+        <ion-icon name="add-circle" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-new-order />
+  <ion-refresher slot="fixed" (ionRefresh)="listOrders($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
+  <p-dataView #dv [value]="orders" emptyMessage="Nenhum pedido encontrado">
+    <ng-template pTemplate="list" let-orders>
+      <div class="grid py-4">
+        @for (order of orders; track order) {
+          <ion-item-sliding>
+            <ion-item-options side="start">
+              <ion-item-option
+                class="bg-blue-300 text-white"
+                (click)="editOrder(order)"
+              >
+                <ion-icon slot="start" name="pencil"></ion-icon>
+                Editar
+              </ion-item-option>
+            </ion-item-options>
+
+            <ion-item>
+              <div class="flex w-full gap-4 py-3">
+                <div class="flex w-full justify-between">
+                  <p>{{ order.name }}</p>
+                  <p>{{ order.price | currency: 'BRL' }}</p>
+                </div>
+              </div>
+            </ion-item>
+
+            <ion-item-options side="end">
+              <ion-item-option
+                class="bg-red-500 text-white"
+                (click)="deleteOrder(order)"
+              >
+                <ion-icon slot="start" name="trash"></ion-icon>
+                Delete
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        }
+      </div>
+    </ng-template>
+  </p-dataView>
 </ion-content>
+
+<p-dialog
+  header="Pedido"
+  [modal]="true"
+  [(visible)]="formOrderVisible"
+  position="bottom"
+  [draggable]="false"
+  [style]="{ width: '100%' }"
+  (onHide)="dialogClosed(false)"
+>
+  <app-new-order
+    [order]="orderToEdit"
+    [products]="products"
+    (orderCreated)="dialogClosed(true)"
+  />
+</p-dialog>
